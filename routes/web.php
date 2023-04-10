@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ChatsController;
+use App\Http\Controllers\DashboardController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +17,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/', [AuthController::class, 'login'])->name('login');
+Route::post('/auth-process', [AuthController::class, 'loginAction'])->name('loginAction');
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/chat/tokopedia', [ChatsController::class, 'tokopedia'])->name('chatTokopedia');
